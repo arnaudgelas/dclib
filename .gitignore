@@ -1,0 +1,16 @@
+/build/
+/build2/
+*~
+\.swp$
+\.o$
+\.orig$
+\.obj$
+^docs/release/
+^docs/docs/web/
+^docs/docs/chm/
+^docs/docs/cache/
+^docs/docs/log.txt$
+^docs/docs/old_log.txt$
+^dlib/test/debug.txt$
+^dlib/test/test$
+^dlib/test/makefile.bak$
