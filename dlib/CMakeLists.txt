@@ -4,31 +4,32 @@
 #
 
 # setting this makes CMake allow normal looking if else statements
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
+set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 cmake_minimum_required(VERSION 2.4)
 
 # Suppress cmake warnings about changes in new versions.
-if(COMMAND cmake_policy) 
-   cmake_policy(SET CMP0003 NEW) 
+if(COMMAND cmake_policy)
+   cmake_policy(SET CMP0003 NEW)
 endif()
 
 
-# make macros that can add #define directives to the entire project.  Not just 
+# make macros that can add #define directives to the entire project.  Not just
 # to the dlib library itself.  I.e. to dlib and to any projects that depend
 # on dlib.
 macro ( add_global_define def_name )
    if (NOT CMAKE_CXX_FLAGS MATCHES "-D${def_name}")
-      set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D${def_name}" 
-         CACHE STRING "Flags used by the compiler during all C++ builds." 
+      set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D${def_name}"
+         CACHE STRING "Flags used by the compiler during all C++ builds."
          FORCE)
    endif ()
 endmacro()
+
 macro ( remove_global_define def_name )
    if (CMAKE_CXX_FLAGS MATCHES " -D${def_name}")
-      string (REGEX REPLACE " -D${def_name}" "" temp_var ${CMAKE_CXX_FLAGS}) 
-      set (CMAKE_CXX_FLAGS "${temp_var}" 
-         CACHE STRING "Flags used by the compiler during all C++ builds." 
+      string (REGEX REPLACE " -D${def_name}" "" temp_var ${CMAKE_CXX_FLAGS})
+      set (CMAKE_CXX_FLAGS "${temp_var}"
+         CACHE STRING "Flags used by the compiler during all C++ builds."
          FORCE)
    endif ()
 endmacro()
@@ -36,18 +37,18 @@ endmacro()
 
 # Make sure ENABLE_ASSERTS is defined for debug builds
 if (NOT CMAKE_CXX_FLAGS_DEBUG MATCHES "-DENABLE_ASSERTS")
-   set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DENABLE_ASSERTS" 
-      CACHE STRING "Flags used by the compiler during C++ debug builds." 
+   set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DENABLE_ASSERTS"
+      CACHE STRING "Flags used by the compiler during C++ debug builds."
       FORCE)
 endif ()
 
-set (DLIB_ISO_CPP_ONLY_STR 
+set (DLIB_ISO_CPP_ONLY_STR
 "Enable this if you don't want to compile any non-ISO C++ code (i.e. you don't use any of the API Wrappers)" )
-set (DLIB_NO_GUI_SUPPORT_STR 
+set (DLIB_NO_GUI_SUPPORT_STR
 "Enable this if you don't want to compile any of the dlib GUI code" )
-set (DLIB_ENABLE_STACK_TRACE_STR 
+set (DLIB_ENABLE_STACK_TRACE_STR
 "Enable this if you want to turn on the DLIB_STACK_TRACE macros" )
-set (DLIB_ENABLE_ASSERTS_STR 
+set (DLIB_ENABLE_ASSERTS_STR
 "Enable this if you want to turn on the DLIB_ASSERT macro" )
 set (DLIB_USE_BLAS_STR
 "Disable this if you don't want to use a BLAS library" )
@@ -75,7 +76,7 @@ add_library(dlib STATIC all/source.cpp )
 
 
 if (NOT DLIB_ISO_CPP_ONLY)
-   # we want to link to the right stuff depending on our platform.  
+   # we want to link to the right stuff depending on our platform. 
    if (WIN32 AND NOT CYGWIN) ###############################################################################
       if (DLIB_NO_GUI_SUPPORT)
          set (dlib_needed_libraries ws2_32)
@@ -90,7 +91,7 @@ if (NOT DLIB_ISO_CPP_ONLY)
          find_library(xlib X11)
          # make sure X11 is in the include path
          find_path(xlib_path Xlib.h
-            PATHS 
+            PATHS
             /Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include
             PATH_SUFFIXES X11
             )
@@ -112,7 +113,7 @@ if (NOT DLIB_ISO_CPP_ONLY)
       find_library(pthreadlib pthread)
       set (dlib_needed_libraries ${pthreadlib})
 
-      # link to the nsl library if it exists.  this is something you need sometimes 
+      # link to the nsl library if it exists.  this is something you need sometimes
       find_library(nsllib nsl)
       if (nsllib)
          set (dlib_needed_libraries ${dlib_needed_libraries} ${nsllib})
@@ -144,7 +145,7 @@ if (NOT DLIB_ISO_CPP_ONLY)
 
 
    if (DLIB_LINK_WITH_LIBPNG)
-      # try to find libpng 
+      # try to find libpng
       set(ZLIB_FIND_QUIETLY ON)
       set(PNG_FIND_QUIETLY ON)
       include(FindPNG)
@@ -157,7 +158,7 @@ if (NOT DLIB_ISO_CPP_ONLY)
    endif()
 
    if (DLIB_LINK_WITH_LIBJPEG)
-      # try to find libjpeg 
+      # try to find libjpeg
       include(FindJPEG)
       if (JPEG_FOUND)
          include_directories(${JPEG_INCLUDE_DIR})
@@ -169,7 +170,7 @@ if (NOT DLIB_ISO_CPP_ONLY)
 
 
    if (DLIB_USE_BLAS OR DLIB_USE_LAPACK)
-      # Try to find BLAS and LAPACK 
+      # Try to find BLAS and LAPACK
       include(cmake_find_blas.txt)
 
       if (DLIB_USE_BLAS)

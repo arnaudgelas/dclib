@@ -1,6 +1,7 @@
 /build/
 /build2/
 *~
+*.user*
 \.swp$
 \.o$
 \.orig$

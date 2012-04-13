@@ -7,25 +7,14 @@
 # setting this makes CMake allow normal looking IF ELSE statements
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 cmake_minimum_required(VERSION 2.4)
-if(COMMAND cmake_policy) 
-   cmake_policy(SET CMP0003 NEW) 
+if(COMMAND cmake_policy)
+   cmake_policy(SET CMP0003 NEW)
 endif()
 
-
-#set default build type to Release
-include(../dlib/release_build_by_default)
-
-
-
-PROJECT(examples)
+PROJECT(DLIB_EXAMPLES)
 
 # add the folder containing the dlib folder to the include path
-INCLUDE_DIRECTORIES(..)
-
-
-# There is a CMakeLists.txt file in the dlib source folder that tells cmake
-# how to build the dlib library.  Tell cmake about that file.
-add_subdirectory(../dlib dlib_build)
+INCLUDE_DIRECTORIES( ${DLIB_SOURCE_DIR} )
 
 
 MACRO(add_example name)
