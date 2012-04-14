@@ -171,7 +171,7 @@ if (NOT DLIB_ISO_CPP_ONLY)
 
    if (DLIB_USE_BLAS OR DLIB_USE_LAPACK)
       # Try to find BLAS and LAPACK
-      include(cmake_find_blas.txt)
+      include(cmake_find_blas.cmake)
 
       if (DLIB_USE_BLAS)
          if (blas_found)
