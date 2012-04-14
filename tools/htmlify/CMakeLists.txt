@@ -3,8 +3,8 @@
 # information about it at http://www.cmake.org
 #
 
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
-cmake_minimum_required(VERSION 2.4)
+#set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
+cmake_minimum_required(VERSION 2.6)
 if(COMMAND cmake_policy) 
    cmake_policy(SET CMP0003 NEW) 
 endif()
@@ -12,22 +12,22 @@ endif()
 # create a variable called target_name and set it to the string "htmlify"
 set (target_name htmlify)
 
-PROJECT(${target_name})
+project(${target_name})
 
 # add all the cpp files we want to compile to this list.  This tells
 # cmake that they are part of our target (which is the executable named htmlify)
-ADD_EXECUTABLE(${target_name} 
+add_executable(${target_name} 
 htmlify.cpp
 to_xml.cpp
 )
 
 # add the folder containing the dlib folder to the include path
-INCLUDE_DIRECTORIES(${DLIB_SOURCE_DIR})
+include_directories(${DLIB_SOURCE_DIR})
 
 # Tell cmake to link our target executable to the non-gui version of the dlib
 # library.
-TARGET_LINK_LIBRARIES(${target_name} dlib )
+target_link_libraries(${target_name} dlib )
 
-INSTALL(TARGETS ${target_name}
+install(TARGETS ${target_name}
 	RUNTIME DESTINATION bin
 	)

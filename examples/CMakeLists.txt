@@ -5,22 +5,22 @@
 
 
 # setting this makes CMake allow normal looking IF ELSE statements
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
-cmake_minimum_required(VERSION 2.4)
+#set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
+cmake_minimum_required(VERSION 2.6)
 if(COMMAND cmake_policy)
    cmake_policy(SET CMP0003 NEW)
 endif()
 
-PROJECT(DLIB_EXAMPLES)
+project(DLIB_EXAMPLES)
 
 # add the folder containing the dlib folder to the include path
-INCLUDE_DIRECTORIES( ${DLIB_SOURCE_DIR} )
+include_directories( ${DLIB_SOURCE_DIR} )
 
 
-MACRO(add_example name)
-   ADD_EXECUTABLE(${name} ${name}.cpp)
-   TARGET_LINK_LIBRARIES(${name} dlib )
-ENDMACRO()
+macro(add_example name)
+   add_executable(${name} ${name}.cpp)
+   target_link_libraries(${name} dlib )
+endmacro()
 
 
 #here we apply our macros

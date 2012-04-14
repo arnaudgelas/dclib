@@ -13,9 +13,9 @@
 #  lapack_libraries  - link against these to use LAPACK library 
 
 # setting this makes CMake allow normal looking if else statements
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
+set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
-SET(blas_found 0)
+set(blas_found 0)
 
 
 if (UNIX)

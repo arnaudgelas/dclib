@@ -269,3 +269,4 @@ else()
    remove_global_define(ENABLE_ASSERTS)
 endif()
 
+add_subdirectory( test )
